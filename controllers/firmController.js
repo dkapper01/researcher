@@ -12,7 +12,7 @@ exports.firm_detail = function(req, res) {
 
 // Display Firm create form on GET.
 exports.firm_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Firm create GET');
+    res.render('firm_form');
 };
 
 // Handle Firm create on POST.

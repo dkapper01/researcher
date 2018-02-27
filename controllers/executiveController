@@ -2,7 +2,7 @@ var Executive = require('../models/executive');
 
 // Display list of all Executives.
 exports.executive_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Executive list');
+    res.render('executive_list');
 };
 
 // Display detail page for a specific Executive.
@@ -11,8 +11,8 @@ exports.executive_detail = function(req, res) {
 };
 
 // Display Executive create form on GET.
-exports.executive_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Executive create GET');
+exports.executive_create_get = function(req, res, next) {
+    res.render('executive_form');
 };
 
 // Handle Executive create on POST.

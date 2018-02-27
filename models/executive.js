@@ -5,7 +5,6 @@ var Schema = mongoose.Schema;
 var ExecutiveSchema = new Schema(
     {
         executive_name: {type: String, required: true, max: 100},
-        start_date: {type: Date, required: true},
         bloomberg_page: {type: String, max: 100}
     }
 );

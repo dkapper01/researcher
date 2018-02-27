@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    h1 #{title}
+
+    form(method='POST' action='')
+        div.form-group
+            label(for='executive_name') First Name:
+            input#executive_name.form-control(type='text', placeholder='' name='executive_name' required='true' value=(undefined===executive ? '' : executive.executive_name) )
+        div.form-group
+            label(for='bloomberg_page') Bloomberg Page
+            input#bloomberg_page.from-conrol(type='test', placeholder='' name='bloomberg_page' value=(undefined===executive ? '' : executive.bloomberg_page) )
+        button.btn.btn-primary(type='submit') Submit
+    if errors
+        ul
+            for error in errors
+                li!= error.msg

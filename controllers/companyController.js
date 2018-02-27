@@ -4,19 +4,19 @@ var async = require('async');
 
 exports.index = function(req, res, next) {
 
-    async.parallel({
-        company_count: function(callback) {
-            Company.count(callback);
-        },
-        executive_count: function(callback) {
-            Executive.count(callback);
-        },
-        firm_count: function(callback) {
-            Firm.count(callback);
-        }
-    }, function(err, results) {
-        res.render('index', { title: 'Researcher', error: err, data: results });
-    });
+    // async.parallel({
+    //     company_count: function(callback) {
+    //         Company.count(callback);
+    //     },
+    //     executive_count: function(callback) {
+    //         Executive.count(callback);
+    //     },
+    //     firm_count: function(callback) {
+    //         Firm.count(callback);
+    //     }
+    // }, function(err, results) {
+    //     res.render('index', { title: 'Researcher', error: err, data: results });
+    // });
 };
 
 // Display list of all Companys.
@@ -31,7 +31,7 @@ exports.company_detail = function(req, res) {
 
 // Display Company create form on GET.
 exports.company_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Company create GET');
+    res.render('company_form');
 };
 
 // Handle Company create on POST.

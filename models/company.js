@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var CompanySchema = new Schema(
     {
         company_name: {type: String, required: true, max: 100},
-        investment_date: {type: Date},
+        // investment_date: {type: Date},
         leadership_page: {type: String, max: 1100 },
         titanhouse_page: {type: String, max: 1100 },
         executives: [{ type: Schema.Types.ObjectId, ref: 'Executive'}]
