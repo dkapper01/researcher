@@ -1,0 +1,41 @@
+var Executive = require('../models/executive');
+
+// Display list of all Executives.
+exports.executive_list = function(req, res) {
+    res.send('NOT IMPLEMENTED: Executive list');
+};
+
+// Display detail page for a specific Executive.
+exports.executive_detail = function(req, res) {
+    res.send('NOT IMPLEMENTED: Executive detail: ' + req.params.id);
+};
+
+// Display Executive create form on GET.
+exports.executive_create_get = function(req, res) {
+    res.send('NOT IMPLEMENTED: Executive create GET');
+};
+
+// Handle Executive create on POST.
+exports.executive_create_post = function(req, res) {
+    res.send('NOT IMPLEMENTED: Executive create POST');
+};
+
+// Display Executive delete form on GET.
+exports.executive_delete_get = function(req, res) {
+    res.send('NOT IMPLEMENTED: Executive delete GET');
+};
+
+// Handle Executive delete on POST.
+exports.executive_delete_post = function(req, res) {
+    res.send('NOT IMPLEMENTED: Executive delete POST');
+};
+
+// Display Executive update form on GET.
+exports.executive_update_get = function(req, res) {
+    res.send('NOT IMPLEMENTED: Executive update GET');
+};
+
+// Handle Executive update on POST.
+exports.executive_update_post = function(req, res) {
+    res.send('NOT IMPLEMENTED: Executive update POST');
+};
