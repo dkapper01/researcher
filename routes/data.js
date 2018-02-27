@@ -9,7 +9,7 @@ var firm_controller = require('../controllers/firmController');
 /// BOOK ROUTES ///
 
 // GET catalog home page.
-// router.get('/', company_controller.index);
+router.get('/', company_controller.index);
 
 // GET request for creating a Company. NOTE This must come before routes that display Company (uses id).
 router.get('/company/create', company_controller.company_create_get);

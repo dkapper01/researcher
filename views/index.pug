@@ -2,4 +2,16 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome
+
+  h1 Dynamic content
+
+  //if error
+  //  p Error getting dynamic content.
+  //else
+  //  p The Data has the following record counts:
+  //
+  //  ul
+  //    li #[strong Firm:] !{data.firm_count}
+  //    li #[strong Company:] !{data.company_count}
+  //    li #[strong Executive:] !{data.executive_count}

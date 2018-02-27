@@ -1,5 +1,24 @@
 var Company = require('../models/company');
 
+var async = require('async');
+
+exports.index = function(req, res, next) {
+
+    async.parallel({
+        company_count: function(callback) {
+            Company.count(callback);
+        },
+        executive_count: function(callback) {
+            Executive.count(callback);
+        },
+        firm_count: function(callback) {
+            Firm.count(callback);
+        }
+    }, function(err, results) {
+        res.render('index', { title: 'Researcher', error: err, data: results });
+    });
+};
+
 // Display list of all Companys.
 exports.company_list = function(req, res) {
     res.send('NOT IMPLEMENTED: Company list');
