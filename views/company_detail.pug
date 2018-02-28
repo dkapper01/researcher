@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+    h1 Company: #{company.company_name}
+
+    //.container-fluid
+    //
+    //    p #[strong Company: ] #{company.company_name}
+    //    p #[strong Leadership URL:] #{company.leadership_page}
+    //    p #[strong TitanHouse URL:] #{company.titanhouse_page}
+
+    hr
+    p
+        a(class='btn btn-success btn-spacing')(href=company.url + '/company_new_company') Add Company
+
+        a(class='btn btn-warning btn-spacing')(href=company.url + '/update') Update Company
+
+        a(class='btn btn-danger btn-spacing')(href=company.url + '/delete') Delete Company

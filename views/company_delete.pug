@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+    h1 Delete company: #{company.company_name}
+
+
+    form(method='POST' action='')
+        div.form-group
+            input#id.form-control(type='hidden',name='id', required='true', value=company._id )
+
+        button.btn.btn-primary(type='submit') Delete
