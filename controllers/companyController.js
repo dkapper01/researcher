@@ -3,6 +3,8 @@ var Company = require('../models/company');
 var Executive = require('../models/executive');
 
 var async = require('async');
+var moment = require('moment');
+
 
 exports.index = function(req, res, next) {
 
@@ -55,15 +57,18 @@ exports.company_detail = function(req, res, next) {
 };
 
 // Display Company create form on GET.
-exports.company_create_get = function(req, res) {
+exports.company_create_get = function(req, res, next) {
     res.render('company_form', { title: "Create Company" });
 };
 
 // Handle Company create on POST.
-exports.company_create_post = function(req, res) {
+exports.company_create_post = function(req, res, next) {
 
     var company = new Company({
-        company_name: req.body.company_name
+        company_name: req.body.company_name,
+        portfolio_investment_date: req.body.portfolio_investment_date,
+        leadership_page: req.body.leadership_page,
+        titanhouse_page: req.body.titanhouse_page
     });
 
     company.save(function (err) {
@@ -123,6 +128,9 @@ exports.company_update_post = function(req, res, next) {
     var company = new Company(
         {
             company_name: req.body.company_name,
+            portfolio_investment_date: { type: Date },
+            leadership_page: req.body.leadership_page,
+            titanhouse_page: req.body.titanhouse_page,
             _id: req.params.id
         }
     );

@@ -1,14 +1,22 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
 
 var Schema = mongoose.Schema;
 
 var CompanySchema = new Schema(
     {
-        company_name: String
-        // leadership_page: {type: String},
-        // titanhouse_page: {type: String}
+        company_name: {type: String},
+        portfolio_investment_date: { type: Date },
+        leadership_page: {type: String},
+        titanhouse_page: {type: String}
     }
 );
+
+CompanySchema
+.virtual('portfolio_investment_date_yyyy_mm_dd')
+.get(function () {
+    return moment(this.portfolio_investment_date).format('YYYY-MM-DD');
+});
 
 // Virtual for author's URL
 CompanySchema

@@ -4,11 +4,12 @@ block content
 
     h1 Company: #{company.company_name}
 
-    //.container-fluid
-    //
-    //    p #[strong Company: ] #{company.company_name}
-    //    p #[strong Leadership URL:] #{company.leadership_page}
-    //    p #[strong TitanHouse URL:] #{company.titanhouse_page}
+    .container-fluid
+
+        p #[strong Firm: ]
+        p #[strong Investment Date: ] #{company.portfolio_investment_date_yyyy_mm_dd}
+        p #[strong Leadership URL:] #{company.leadership_page}
+        p #[strong TitanHouse URL:] #{company.titanhouse_page}
 
     hr
     p
