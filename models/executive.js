@@ -11,10 +11,10 @@ var ExecutiveSchema = new Schema(
 
 // Virtual for executive's URL
 ExecutiveSchema
-    .virtual('url')
-    .get(function () {
-        return '/data/executive/' + this._id;
-    });
+.virtual('url')
+.get(function () {
+    return '/data/executive/' + this._id;
+});
 
 //Export model
 module.exports = mongoose.model('Executive', ExecutiveSchema);

@@ -1,0 +1,10 @@
+extends layout
+
+block content
+
+    h1 Firm: #{firm.firm_name}
+
+    p
+        a(href=firm.url+'/delete') Delete Firm
+    p
+        a(href=firm.url + '/update') Update Firm

@@ -1,5 +1,4 @@
 var Company = require('../models/company');
-
 var async = require('async');
 
 exports.index = function(req, res, next) {
@@ -36,7 +35,12 @@ exports.company_create_get = function(req, res) {
 
 // Handle Company create on POST.
 exports.company_create_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Company create POST');
+
+    Company.save(function (err) {
+        if (err) { return next(err); }
+        //successful - redirect to new book record.
+        res.redirect('company_form');
+    });
 };
 
 // Display Company delete form on GET.

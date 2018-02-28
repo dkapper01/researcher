@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1= title
+    ul
+    each firm in firm_list
+        li
+            a(href=firm.url) #{firm.firm_name}
+    else
+        li Thereare no genre.
