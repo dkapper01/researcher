@@ -1,0 +1,10 @@
+extends layout
+
+block content
+
+    h1 Executive: #{executive.executive_name}
+
+    p
+        a(href=executive.url+'/delete') Delete Executive
+    p
+        a(href=executive.url + '/update') Update Executive

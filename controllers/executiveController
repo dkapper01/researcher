@@ -1,41 +1,119 @@
 var Executive = require('../models/executive');
+var Company = require('../models/company');
+var Frim = require('../models/firm');
+
+var async = require('async');
 
 // Display list of all Executives.
-exports.executive_list = function(req, res) {
-    res.render('executive_list');
+exports.executive_list = function(req, res, next) {
+
+    Executive.find()
+        .exec(function (err, list_executives) {
+            if(err) { return next(err); }
+            // Successful, so render
+            res.render('executive_list', { title: 'Executive List', executive_list: list_executives });
+        })
 };
 
 // Display detail page for a specific Executive.
-exports.executive_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Executive detail: ' + req.params.id);
+exports.executive_detail = function(req, res, next) {
+
+    async.parallel({
+        executive: function(callback) {
+            Executive.findById(req.params.id)
+                .exec(callback);
+        }
+
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.executive==null) { // No results.
+            var err = new Error('Executive not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Successful, so render
+        res.render('executive_detail', { title: 'Executive Detail', executive: results.executive } );
+    });
+
 };
 
 // Display Executive create form on GET.
-exports.executive_create_get = function(req, res, next) {
-    res.render('executive_form');
+exports.executive_create_get = function(req, res) {
+    res.render('executive_form', { title: "Create Executive" });
 };
 
 // Handle Executive create on POST.
 exports.executive_create_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Executive create POST');
+
+    var executive = new Executive({
+        executive_name: req.body.executive_name
+    });
+
+    executive.save(function (err) {
+        if (err) { return next(err); }
+        // Successful - redirect to new executive record.
+        res.redirect(executive.url);
+    });
 };
 
 // Display Executive delete form on GET.
-exports.executive_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Executive delete GET');
+exports.executive_delete_get = function(req, res, next) {
+
+    async.parallel({
+        executive: function(callback) {
+            Executive.findById(req.params.id).exec(callback)
+        },
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.executive==null) { // No results.
+            res.redirect('/data/executives');
+        }
+        // Successful, so render.
+        res.render('executive_delete', { title: 'Delete Executive', executive: results.executive } );
+    });
+
 };
 
 // Handle Executive delete on POST.
-exports.executive_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Executive delete POST');
+exports.executive_delete_post = function(req, res, next) {
+
+    Executive.findByIdAndRemove(req.body.id, function deleteExecutive(err) {
+        if (err) { return next(err); }
+        // Success - go to executives list.
+        res.redirect('/data/executives');
+    });
 };
 
 // Display Executive update form on GET.
-exports.executive_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Executive update GET');
+exports.executive_update_get = function(req, res, next) {
+
+    Executive.findById(req.params.id, function (err, executive) {
+        if (err) { return next(err); }
+        if (executive == null) { // No results.
+            var err = new Error('Executive not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Success.
+        res.render('executive_form', { title: 'Update Executive', executive: executive });
+
+    });
 };
 
 // Handle Executive update on POST.
-exports.executive_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Executive update POST');
+exports.executive_update_post = function(req, res, next) {
+
+    var executive = new Executive(
+        {
+            executive_name: req.body.executive_name,
+            _id: req.params.id
+        }
+    );
+
+    // Data from form is valid. Update the record.
+    Executive.findByIdAndUpdate(req.params.id, executive, {}, function (err, theexecutive) {
+        if (err) { return next(err); }
+        // Successful - redirect to genre detail page.
+        res.redirect(theexecutive.url);
+    });
 };

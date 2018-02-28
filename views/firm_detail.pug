@@ -4,7 +4,11 @@ block content
 
     h1 Firm: #{firm.firm_name}
 
+    hr
     p
-        a(href=firm.url+'/delete') Delete Firm
-    p
-        a(href=firm.url + '/update') Update Firm
+        a(class='btn btn-success btn-spacing')(href=firm.url + '/firm_new_company') Add Company
+
+        a(class='btn btn-warning btn-spacing')(href=firm.url+'/update') Update Firm
+
+        a(class='btn btn-danger btn-spacing')(href=firm.url + '/delete') Delete Firm
+

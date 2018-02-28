@@ -105,7 +105,8 @@ exports.firm_update_post = function(req, res, next) {
     
     var firm = new Firm(
         {
-            firm_name: req.body.firm_name
+            firm_name: req.body.firm_name,
+            _id: req.params.id
         }    
     );
 
