@@ -4,7 +4,11 @@ block content
 
     h1 Executive: #{executive.executive_name}
 
+    hr
     p
-        a(href=executive.url+'/delete') Delete Executive
-    p
-        a(href=executive.url + '/update') Update Executive
+        a(class='btn btn-success btn-spacing')(href=executive.url + '/executive_new_company') Add Company
+
+        a(class='btn btn-warning btn-spacing')(href=executive.url+'/update') Update Executive
+
+        a(class='btn btn-danger btn-spacing')(href=executive.url + '/delete') Delete Executive
+
