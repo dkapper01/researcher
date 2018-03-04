@@ -10,11 +10,13 @@ block content
         p #[strong Investment Date: ] #{company.portfolio_investment_date_yyyy_mm_dd}
         p #[strong Leadership URL:] #{company.leadership_page}
         p #[strong TitanHouse URL:] #{company.titanhouse_page}
+        p #[strong Executive:] #{company.executive}
+        p #[strong ID:] #{company.id}
 
     hr
     p
-        a(class='btn btn-success btn-spacing')(href=company.url + '/company_new_company') Add Company
+        a(class='btn btn-success btn-spacing')(href=company.url) Add Company
 
         a(class='btn btn-warning btn-spacing')(href=company.url + '/update') Update Company
 
-        a(class='btn btn-danger btn-spacing')(href=company.url + '/delete') Delete Company
+        a(class='btn btn-danger btn-spacing')(href=company.url + '/delete') Delete Companyd

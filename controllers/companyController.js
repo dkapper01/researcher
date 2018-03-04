@@ -1,4 +1,4 @@
-var Company = require('../models/company');
+var Firm = require('../models/firm');
 var Company = require('../models/company');
 var Executive = require('../models/executive');
 
@@ -27,6 +27,7 @@ exports.index = function(req, res, next) {
 exports.company_list = function(req, res, next) {
 
     Company.find()
+        .sort([['company_name', 'descending']])
         .exec(function (err, list_companys) {
             if(err) { return next(err); }
             // Successful, so render
@@ -58,7 +59,16 @@ exports.company_detail = function(req, res, next) {
 
 // Display Company create form on GET.
 exports.company_create_get = function(req, res, next) {
-    res.render('company_form', { title: "Create Company" });
+
+    // Get all authors and genres, which we can use for adding to our book.
+    async.parallel({
+        executives: function(callback) {
+            Executive.find(callback);
+        }
+    }, function(err, results) {
+        if (err) { return next(err); }
+        res.render('company_form', { title: 'Create Company',executives:results.executives });
+    });
 };
 
 // Handle Company create on POST.
@@ -66,6 +76,7 @@ exports.company_create_post = function(req, res, next) {
 
     var company = new Company({
         company_name: req.body.company_name,
+        executive: req.body.executive,
         portfolio_investment_date: req.body.portfolio_investment_date,
         leadership_page: req.body.leadership_page,
         titanhouse_page: req.body.titanhouse_page

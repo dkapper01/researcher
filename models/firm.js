@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 
 var FirmSchema = new Schema(
     {
-        firm_name: {type: String}
-        // companies: [{ type: Schema.Types.ObjectId, ref: 'Company' }]
+        firm_name: {type: String},
+        companies: [{ type: Schema.Types.ObjectId, ref: 'Company' }]
     }
 );
 

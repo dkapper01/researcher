@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var CompanySchema = new Schema(
     {
         company_name: {type: String},
+        executive: {type: Schema.ObjectId, ref: 'Executive'},
         portfolio_investment_date: { type: Date },
         leadership_page: {type: String},
         titanhouse_page: {type: String}
@@ -18,7 +19,7 @@ CompanySchema
     return moment(this.portfolio_investment_date).format('YYYY-MM-DD');
 });
 
-// Virtual for author's URL
+// Virtual for company's URL
 CompanySchema
 .virtual('url')
 .get(function () {

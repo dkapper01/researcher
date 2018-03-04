@@ -2,12 +2,15 @@ var Firm = require('../models/firm');
 var Company = require('../models/company');
 var Executive = require('../models/executive');
 
+const { body,validationResult } = require('express-validator/check');
+
 var async = require('async');
 
 // Display list of all Firms.
 exports.firm_list = function(req, res, next) {
 
     Firm.find()
+        .sort([['firm_name', 'descending']])
         .exec(function (err, list_firms) {
             if(err) { return next(err); }
             // Successful, so render
@@ -43,17 +46,27 @@ exports.firm_create_get = function(req, res) {
 };
 
 // Handle Firm create on POST.
-exports.firm_create_post = function(req, res) {
+exports.firm_create_post = function(req, res, next) {
 
     var firm = new Firm({
         firm_name: req.body.firm_name
     });
 
-    firm.save(function (err) {
-        if (err) { return next(err); }
-        // Successful - redirect to new firm record.
-        res.redirect(firm.url);
-    });
+    Firm.findOne({ 'name': req.body.name })
+        .exec( function(err, found_firm) {
+            if (err) { return next(err); }
+            if (found_firm) {
+                // Firm exists, redirect to its detail page.
+                res.redirect(found_firm.url);
+            }
+            else {
+                firm.save(function (err) {
+                    if (err) { return next(err); }
+                    // Firm saved. Redirect to firm detail page.
+                    res.redirect(firm.url);
+                });
+            }
+        });
 };
 
 // Display Firm delete form on GET.
@@ -102,18 +115,18 @@ exports.firm_update_get = function(req, res, next) {
 
 // Handle Firm update on POST.
 exports.firm_update_post = function(req, res, next) {
-    
+
     var firm = new Firm(
         {
             firm_name: req.body.firm_name,
             _id: req.params.id
-        }    
+        }
     );
 
     // Data from form is valid. Update the record.
     Firm.findByIdAndUpdate(req.params.id, firm, {}, function (err, thefirm) {
         if (err) { return next(err); }
-        // Successful - redirect to genre detail page.
+        // Successful - redirect to firm detail page.
         res.redirect(thefirm.url);
     });
 };

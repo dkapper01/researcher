@@ -8,6 +8,14 @@ block content
             label(for='company_name') Company Name:
             input#company_name.form-control(type='text', placeholder='' name='company_name' required='true' value=(undefined===company ? '' : company.company_name) )
         div.form-group
+            label(for='executive') Executive:
+            select#executive.form-control(type='select', placeholder='Select executive' name='executive' required='true' )
+                  for executive in executives
+                      if company
+                          option(value=executive._id selected=(executive._id.toString() == company.executive._id.toString() ? 'selected' : false) ) #{executive.executive}
+                      else
+                      option(value=executive._id) #{executive.executive}
+        div.form-group
             label(for='portfolio_investment_date') Portfolio Investment Date:
             input#portfolio_investment_date.form-control(type='date', name='portfolio_investment_date' value=(undefined === company ? '' : company.portfolio_investment_date_yyyy_mm_dd) )
         div.form-group
